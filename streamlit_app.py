@@ -207,6 +207,9 @@ with st.sidebar:
     st.write("")
     html('<div class="side-box"><b>Cenário do Grupo 1</b><br>Promoção de +60% em F3 na semana 25 · teto ESG de 18 viagens/mês · '
          'mix loja 70%, e-commerce 15%, marketplace 10%, retira 5%.</div>')
+    st.write("")
+    html('<div class="side-box"><b>Grupo 1</b><br>Davi Aguiar<br>Isabella Alvine<br>Júlia Lobianco<br>Lucas Cuan'
+         '<br><br><b>Professor</b><br>Rodrigo Caiado</div>')
 
 if not fam_sel or not can_sel:
     st.warning("Selecione ao menos uma família e um canal na barra lateral.")
