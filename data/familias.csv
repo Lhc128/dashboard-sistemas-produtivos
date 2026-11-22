@@ -1,0 +1,6 @@
+familia,exemplos,perfil,n_skus,demanda_media_semanal,cv_pct,lead_time_dias,lead_time_dp_dias,shelf_life,custo_unitario_rs,margem_pct,descarte_mensal_pct,modelo,wape_pct,mape_pct,mae,rmse,observacao
+F1 · Perecíveis,"Leite, pao, iogurtes, ovos",Smooth/Alto giro,6,2800,12,2,0.5,7-15 dias,8.5,35,4.5,"ARIMA(1,1,1)",10.4,11.2,284,342,Viés de subestimação na retomada; segmentar por shelf life
+F2 · Premium,"Azeites, queijos, vinhos",Intermitente,5,350,47,14,4.0,6-12 meses,42.0,45,0.8,SES,36.4,96.1,136,181,Sem modelo dominante; erro absorvido pelo estoque de segurança
+F3 · Mercearia,"Arroz, feijao, cafe, macarrao",Giro massivo,6,4500,10,5,1.5,12+ meses,12.0,25,0.3,"ARIMA(1,0,1) com constante",8.7,9.1,390,474,Robusto à métrica; incorporar promoção via evento
+F4 · Congelados,"Acai, wraps, vegetais, sorvetes",Tendencia+sazonal,5,600,25,7,2.0,3-6 meses,22.0,40,1.5,Regressão + tendência + eventos,24.4,30.3,218,257,Único sem viés; reavaliar tendência
+F5 · Bebidas,"Cervejas, kombuchas, sucos",Lumpy,5,420,55,10,3.0,3-6 meses,18.0,38,1.2,Random Forest,31.1,38.6,192,240,"Croston/TSB (33,1%) como referência simples"

@@ -1,0 +1,9 @@
+sku,metrica,naive,autoets,reducao_pct
+Leite Integral (F1-001),MAE,207.65,141.63,31.8
+Leite Integral (F1-001),RMSE,222.32,151.91,31.7
+Leite Integral (F1-001),MAPE,22.19,15.23,31.4
+Leite Integral (F1-001),sMAPE,12.68,8.27,34.8
+Presunto Parma (F2-005),MAE,32.25,19.04,41.0
+Presunto Parma (F2-005),RMSE,37.39,25.91,30.7
+Presunto Parma (F2-005),MAPE,53.96,41.01,24.0
+Presunto Parma (F2-005),sMAPE,32.45,16.81,48.2

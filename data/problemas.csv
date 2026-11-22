@@ -1,0 +1,6 @@
+id,problema,evidencia,impacto,prioridade,detalhe,familias,tamanho
+P3,Dados corrompidos e WMS descalibrado,10.0,10.0,1,12% dos SKUs sem EAN; 8% de falha de baixa no WMS,Todas,5
+P5,Gestão reativa e viagens extras,9.5,8.5,2,"Fill rate 92%; 18 fretes extras/mês (R$ 22.500, 756 kg CO2e)","F1, F4, F5",4
+P2,Estoque engessado (regra única de 2 semanas),8.0,9.0,3,"4,5% de descarte em perecíveis (≈ R$ 38 mil/mês)",F1 a F4,3
+P1,Previsão estática e silo comercial,7.0,7.5,4,MAPE > 25% nas famílias sazonais; média dos últimos 3 meses,"F2, F4, F5",2
+P4,Imaturidade multicanal,6.5,6.0,5,Atraso de 4 h na API; 6% de cancelamento online,"F1, F2, F5",1

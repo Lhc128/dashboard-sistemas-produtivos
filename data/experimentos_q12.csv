@@ -1,0 +1,13 @@
+exp,familia,alternativa,custo_rs,fill_pct,descarte_pct,dp_custo_rs,leitura
+Lote × validade,F1 · Perecíveis,"(Q,r) com lote do EOQ (4.975 un)",100800,99.6,5.8,,Lote cobre ~12 dias de um item que vence em 14
+Lote × validade,F1 · Perecíveis,"(Q,r) com lote limitado (2.948 un)",14600,100.0,0.0,,Economia de R$ 86 mil/ano na família
+Reforço pontual,F3 · Mercearia,"Proteção permanente (z = 2,33)",35000,99.69,0.0,16500.0,Paga o ano todo por um risco de 3 semanas
+Reforço pontual,F3 · Mercearia,Reforço de 40% por 3 semanas,22600,100.0,0.0,500.0,35% mais barato e 30× mais estável
+Lead time,F3 · Mercearia,"(Q,r) com lead time base",32000,99.7,0.0,,Referência
+Lead time,F3 · Mercearia,"(Q,r) com lead time dobrado",66000,98.8,0.0,,Custo dobra; serviço ainda ≥ 97%
+Lead time,F3 · Mercearia,"(R,S) com lead time base",48000,,0.0,,Referência
+Lead time,F3 · Mercearia,"(R,S) com lead time dobrado",64000,,0.0,,Degrada junto
+Serviço × custo,F1 · Perecíveis,"(R,S): z de 0,90 para 2,33",3300,100.0,,,"+R$ 3,3 mil por 0,00 ponto de serviço"
+Serviço × custo,F1 · Perecíveis,"(Q,r): z de 0,90 para 0,99",30400,,,,"+R$ 30,4 mil por 0,18 ponto"
+Monte Carlo,F1 · Perecíveis,"(R,S) previsão: média de 50 cenários",15400,,,,"p95 de R$ 18,3 mil, menor risco de cauda"
+Monte Carlo,F1 · Perecíveis,"(R,S) previsão: p95 de 50 cenários",18300,,,,Cauda do custo

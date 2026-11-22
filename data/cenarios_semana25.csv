@@ -1,0 +1,4 @@
+cenario,indicador,valor,unidade,leitura
+1 · Promoção não prevista,Fill rate na semana 25,89,%,"SS cobre a maior parte do pico, mas sobra déficit de ≈ 360 un; KPI 1 violado"
+2 · Promoção na previsão,Estoque de segurança da semana,2720,un,Pedido antecipado na semana 23; ≈ R$ 5 mil de capital por 2 semanas
+3 · Promoção + atraso de fornecedor,Semana do pedido,22,semana,Lead time efetivo de 12 dias; SS dinâmico por semana

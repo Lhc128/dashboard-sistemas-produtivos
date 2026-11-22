@@ -1,0 +1,9 @@
+cenario_id,familia,politica,parametrizacao,cenario,custo_medio_rs,custo_dp_rs,fill_pct,fill_p05_pct,estoque_sem,descarte_pct,viagens_mes,aprovada,motivo
+"F1 (Q,r) · histórico · base",F1 · Perecíveis,"(Q,r)",histórico,base,100014,13984,99.8,99.0,1.14,5.98,0.08,Não,Reprova no descarte
+"F1 (Q,r) · previsão · promoção",F1 · Perecíveis,"(Q,r)",previsão,promoção,100699,12964,99.6,99.2,1.14,5.88,0.13,Não,Reprova no descarte
+"F1 (R,S) · histórico · promoção",F1 · Perecíveis,"(R,S)",histórico,promoção,21194,2929,100.0,100.0,1.03,0.4,0.01,Sim,Passa nos quatro filtros
+"F1 (R,S) · previsão · promoção",F1 · Perecíveis,"(R,S)",previsão,promoção,16045,727,100.0,100.0,1.01,0.02,0.0,Sim,Melhor de F1
+"F3 (Q,r) · histórico · base",F3 · Mercearia,"(Q,r)",histórico,base,22921,4751,99.9,99.7,1.2,0.0,0.04,Sim,Passa nos quatro filtros
+"F3 (Q,r) · previsão · base",F3 · Mercearia,"(Q,r)",previsão,base,22791,6146,99.9,99.5,1.2,0.0,0.05,Sim,"Empate técnico com (R,S)"
+"F3 (Q,r) · previsão · promoção",F3 · Mercearia,"(Q,r)",previsão,promoção,33137,14585,99.6,98.8,1.16,0.0,0.12,Sim,Melhor de F3 na promoção
+"F3 (R,S) · previsão · promoção",F3 · Mercearia,"(R,S)",previsão,promoção,42916,19292,99.4,98.6,1.61,0.0,0.16,Sim,"Passa, mas custa 30% mais"

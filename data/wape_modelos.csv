@@ -1,0 +1,42 @@
+familia,modelo,wape_pct,vencedor
+F1 · Perecíveis,Ingênuo,10.44,Não
+F1 · Perecíveis,Média móvel 4,10.96,Não
+F1 · Perecíveis,Média móvel 8,11.0,Não
+F1 · Perecíveis,SES,10.46,Não
+F1 · Perecíveis,Holt amortecido,10.58,Não
+F1 · Perecíveis,ARIMA,10.42,Sim
+F1 · Perecíveis,Regressão + eventos,14.16,Não
+F1 · Perecíveis,Sazonal ingênuo (52),15.65,Não
+F1 · Perecíveis,Random Forest,12.9,Não
+F2 · Premium,Ingênuo,53.79,Não
+F2 · Premium,Média móvel 4,44.42,Não
+F2 · Premium,Média móvel 8,38.21,Não
+F2 · Premium,SES,36.37,Sim
+F2 · Premium,Croston,37.31,Não
+F2 · Premium,SBA,37.72,Não
+F2 · Premium,TSB,37.31,Não
+F2 · Premium,Regressão + eventos,41.98,Não
+F3 · Mercearia,Ingênuo,12.4,Não
+F3 · Mercearia,Média móvel 4,10.59,Não
+F3 · Mercearia,SES,8.99,Não
+F3 · Mercearia,ARIMA,8.72,Sim
+F3 · Mercearia,Regressão + eventos,9.81,Não
+F3 · Mercearia,Sazonal ingênuo (52),12.95,Não
+F3 · Mercearia,Gradient Boosting,10.92,Não
+F4 · Congelados,Ingênuo,30.76,Não
+F4 · Congelados,Média móvel 4,25.51,Não
+F4 · Congelados,SES,26.68,Não
+F4 · Congelados,Holt,27.35,Não
+F4 · Congelados,Holt amortecido,26.81,Não
+F4 · Congelados,ARIMA,26.84,Não
+F4 · Congelados,Regressão + tendência + eventos,24.42,Sim
+F4 · Congelados,Sazonal ingênuo (52),29.52,Não
+F5 · Bebidas,Ingênuo,40.76,Não
+F5 · Bebidas,Média móvel 4,36.65,Não
+F5 · Bebidas,Média móvel 8,35.16,Não
+F5 · Bebidas,SES,34.34,Não
+F5 · Bebidas,Croston,33.14,Não
+F5 · Bebidas,SBA,34.82,Não
+F5 · Bebidas,TSB,33.15,Não
+F5 · Bebidas,Sazonal ingênuo (52),34.62,Não
+F5 · Bebidas,Random Forest,31.1,Sim

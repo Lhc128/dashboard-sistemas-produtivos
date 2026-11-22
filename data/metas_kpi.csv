@@ -1,0 +1,6 @@
+kpi,dimensao,baseline,meta,unidade,sentido,decisor,frequencia,baseline_texto,meta_texto
+Fill rate,Serviço,92.0,97,%,maior,Helena (Operações),Semanal,≈ 92% nas lojas; 6% de cancelamento online,"≥ 97%, inclusive na semana 25; cancelamento online ≤ 2%"
+Viagens emergenciais,Custo,18.0,12,viagens/mês,menor,Rafaela (CD),Semanal,18/mês (R$ 22.500),"≤ 12/mês (R$ 15.000; −33,3%)"
+CO2e de urgências,ESG,756.0,504,kg/mês,menor,Lívia (ESG),Mensal,756 kg/mês (42 kg por viagem),"≤ 504 kg/mês (−33,3%)"
+Descarte de perecíveis,ESG (guard-rail),4.5,2,%,menor,Lívia (ESG),Mensal,"4,5% do valor comprado (≈ R$ 38 mil/mês)",≤ 2% do volume comprado em F1
+Cancelamento e-commerce,Serviço,6.0,2,%,menor,Helena (Operações),Semanal,6% dos pedidos online,≤ 2%
