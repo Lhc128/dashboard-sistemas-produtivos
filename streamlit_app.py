@@ -212,8 +212,7 @@ if not fam_sel or not can_sel:
     st.warning("Selecione ao menos uma família e um canal na barra lateral.")
     st.stop()
 
-html('<div class="titulo">🌅 Vila Aurora · Analytics do Projeto</div>'
-     '<div class="sub">ENG4550 · Projeto Integrado em Sistemas Produtivos · 22 lojas · cerca de 4.200 SKUs · 104 semanas de histórico</div>')
+html('<div class="titulo">🌅 Vila Aurora · Analytics do Projeto</div>')
 html(f'<div class="pagina">Página: <span>{pagina}</span></div>')
 
 km = D["kpi_mensal"]
@@ -411,6 +410,3 @@ else:
              f'<div class="light"><i style="--c:{CORAL}"></i><span><b>Vermelho:</b> ≥ 12 viagens ou fill rate &lt; 96%.</span></div>'
              f'<div class="gd" style="padding-bottom:.3rem">Gatilho: promoção comunicada com duas semanas de antecedência.</div>')
     st.info("Limites da simulação: demanda uniforme nos dias da semana, pool único por família, ruptura como venda perdida e só duas temporadas no histórico.", icon="ℹ️")
-
-html('<div class="foot">Fontes: bases do caso Vila Aurora (Blocos 1 e 2) e resultados do Grupo 1 (Brief Executivo, Relatório Parcial, Relatório do Bloco 3, '
-     'Políticas de Estoque Q10–Q12, notebook Q4). Davi Aguiar · Isabella Alvine · Júlia Lobianco · Lucas Cuan · Prof. Rodrigo Caiado · PUC-Rio 2026.2</div>')
