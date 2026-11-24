@@ -109,6 +109,32 @@ hr.sep {{ border: none; border-top: 1px solid {BORDA}; margin: .9rem 0 1.1rem; }
 .light i {{ width: 12px; height: 12px; border-radius: 50%; margin-top: 4px; flex: none; background: var(--c); box-shadow: 0 0 10px var(--c); }}
 .foot {{ color: {SUAVE}; font-size: .76rem; margin-top: 1.5rem; padding-top: .9rem; border-top: 1px solid {BORDA}; }}
 [data-testid="stDataFrame"] {{ border: 1px solid {BORDA}; border-radius: 8px; }}
+
+/* ── Riscos & S&OE ── */
+.risk-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 14px; margin: .6rem 0; }}
+.risk-card {{ background: {PAINEL}; border: 1px solid {BORDA}; border-radius: 10px; padding: 1rem 1.1rem; position: relative; overflow: hidden; }}
+.risk-card .bar {{ position: absolute; left: 0; top: 0; bottom: 0; width: 5px; border-radius: 10px 0 0 10px; }}
+.risk-card .bar.g {{ background: {VERDE}; box-shadow: 0 0 8px {VERDE}; }}
+.risk-card .bar.y {{ background: {AMBAR}; box-shadow: 0 0 8px {AMBAR}; }}
+.risk-card .bar.r {{ background: {CORAL}; box-shadow: 0 0 8px {CORAL}; }}
+.risk-card .rid {{ font-size: .72rem; color: {SUAVE}; font-weight: 700; letter-spacing: .06em; }}
+.risk-card .rn {{ font-weight: 700; font-size: 1rem; margin: .15rem 0 .3rem; color: {TEXTO}; }}
+.risk-card .dot {{ display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }}
+.risk-card .dot.g {{ background: {VERDE}; box-shadow: 0 0 6px {VERDE}; }}
+.risk-card .dot.y {{ background: {AMBAR}; box-shadow: 0 0 6px {AMBAR}; }}
+.risk-card .dot.r {{ background: {CORAL}; box-shadow: 0 0 6px {CORAL}; }}
+.risk-card .meta {{ display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: .82rem; margin-top: .4rem; }}
+.risk-card .meta .lbl {{ color: {SUAVE}; }}
+.risk-card .meta .val {{ color: {TEXTO}; font-weight: 500; }}
+.risk-card .acao {{ background: rgba(46,134,222,.08); border: 1px solid rgba(46,134,222,.2); border-radius: 6px; padding: .55rem .7rem; font-size: .82rem; color: {TEXTO}; margin-top: .5rem; line-height: 1.4; }}
+.risk-card .acao b {{ color: {CIANO}; }}
+.soe-row {{ display: flex; gap: 14px; margin: .5rem 0; }}
+.soe-box {{ flex: 1; background: {PAINEL}; border: 1px solid {BORDA}; border-radius: 10px; padding: .9rem 1rem; }}
+.soe-box .freq {{ font-weight: 700; font-size: 1.05rem; color: {CIANO}; margin-bottom: .2rem; }}
+.soe-box .dur {{ font-size: .78rem; color: {SUAVE}; margin-bottom: .4rem; }}
+.soe-box .who {{ font-size: .84rem; margin-bottom: .3rem; }}
+.soe-box .who b {{ color: {AMBAR}; }}
+.soe-box .what {{ font-size: .82rem; color: {SUAVE}; line-height: 1.45; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -184,8 +210,8 @@ LOGO = f"""
 <div class="nm">VILA AURORA</div><div class="sb">Analytics do projeto · Grupo 1</div>
 </div>"""
 
-PAGINAS = ["Visão geral", "Previsão", "Estoques", "Plano de ação"]
-ICONES = ["house", "graph-up", "box-seam", "compass"]
+PAGINAS = ["Visão geral", "Previsão", "Estoques", "Riscos & S&OE", "Plano de ação"]
+ICONES = ["house", "graph-up", "box-seam", "shield-exclamation", "compass"]
 
 # ------------------------------------------------------------------ barra lateral
 with st.sidebar:
@@ -384,6 +410,134 @@ elif pagina == "Estoques":
     vals = [f"{br(cs.valor[0])}%", f"{br(cs.valor[1])} un", f"semana {br(cs.valor[2])}"]
     html('<div class="gt" style="margin-top:1rem">Semana 25 em F3: um pico de 5,8 desvios que já está no histórico</div>')
     kgrid(*[kpi("📌", r.cenario, r.indicador, v, "", r.leitura, "bad" if i == 0 else "ok") for i, (v, (_, r)) in enumerate(zip(vals, cs.iterrows()))])
+
+# ================================================================== RISCOS & S&OE
+elif pagina == "Riscos & S&OE":
+    riscos = D.get("riscos_q13")
+    if riscos is None:
+        riscos = pd.read_csv(DATA / "riscos_q13.csv")
+        D["riscos_q13"] = riscos
+    soe = D.get("soe_cadencia")
+    if soe is None:
+        soe = pd.read_csv(DATA / "soe_cadencia.csv")
+        D["soe_cadencia"] = soe
+
+    tabela("Matriz completa de riscos (Q13)", riscos[["id", "risco", "probabilidade", "impacto", "kpi_gatilho",
+           "limiar_amarelo", "limiar_vermelho", "decisor", "acao_operacional", "categoria"]])
+
+    # --- KPIs summary
+    n_total = len(riscos)
+    n_alto = int(((riscos.prob_num * riscos.imp_num) >= 6).sum())
+    n_critico = int((riscos.imp_num >= 4).sum())
+    cats = riscos.categoria.nunique()
+    kgrid(kpi("🛡️", "Riscos mapeados", "total identificados", str(n_total), "", "5–8 exigidos pela Q13", "ok"),
+          kpi("⚠️", "Risco alto/crítico", "probabilidade × impacto ≥ 6", str(n_alto), f"de {n_total}", "requerem ação proativa", "bad"),
+          kpi("🔴", "Impacto crítico", "nível 4 (máximo)", str(n_critico), "", "WMS offline", "bad"),
+          kpi("📂", "Categorias", "áreas cobertas", str(cats), "", "Estoque, Demanda, ESG, TI…", "ok"))
+    html('<hr class="sep">')
+
+    # --- Scatter plot: probabilidade × impacto
+    g1, g2 = st.columns([3, 2], gap="medium")
+    with g1, st.container(key="card_rmatrix"):
+        cab("Matriz probabilidade × impacto",
+            "Tamanho: score de risco (prob × imp). Cor: categoria. Quanto mais alto e à direita, mais urgente.")
+        riscos["score"] = riscos.prob_num * riscos.imp_num
+        prob_map = {"Baixa": 1, "Média": 2, "Alta": 3}
+        imp_map = {"Baixo": 1, "Médio": 2, "Alto": 3, "Crítico": 4}
+        cat_cores = {"Estoque": AZUL, "Demanda": CORAL, "Suprimentos": CIANO, "Tecnologia": ROXO,
+                     "ESG": VERDE, "Omnicanal": AMBAR, "Financeiro": "#C07AFF"}
+        fig = px.scatter(riscos, x="prob_num", y="imp_num", size="score", text="id",
+                         hover_name="risco", color="categoria",
+                         hover_data={"kpi_gatilho": True, "decisor": True, "prob_num": False, "imp_num": False, "score": False},
+                         color_discrete_map=cat_cores, size_max=42,
+                         labels={"prob_num": "Probabilidade", "imp_num": "Impacto"})
+        fig.update_traces(textposition="middle center", textfont=dict(color="white", size=11, family="Inter"),
+                          marker=dict(opacity=0.9, line=dict(width=0)))
+        fig.update_xaxes(range=[0.4, 3.6], tickvals=[1, 2, 3], ticktext=["Baixa", "Média", "Alta"])
+        fig.update_yaxes(range=[0.6, 4.4], tickvals=[1, 2, 3, 4], ticktext=["Baixo", "Médio", "Alto", "Crítico"])
+        # Zonas de risco
+        fig.add_shape(type="rect", x0=0.5, y0=0.5, x1=1.5, y1=2.5, fillcolor=VERDE, opacity=0.06, line_width=0)
+        fig.add_shape(type="rect", x0=1.5, y0=0.5, x1=2.5, y1=2.5, fillcolor=AMBAR, opacity=0.06, line_width=0)
+        fig.add_shape(type="rect", x0=0.5, y0=2.5, x1=2.5, y1=4.5, fillcolor=AMBAR, opacity=0.06, line_width=0)
+        fig.add_shape(type="rect", x0=2.5, y0=0.5, x1=3.5, y1=4.5, fillcolor=CORAL, opacity=0.06, line_width=0)
+        fig.add_shape(type="rect", x0=0.5, y0=2.5, x1=3.5, y1=4.5, fillcolor=CORAL, opacity=0.04, line_width=0)
+        grafico(fig, 400)
+
+    with g2, st.container(key="card_risco_score"):
+        cab("Score de risco (Prob × Impacto)", "Barras vermelhas: score ≥ 6. Decisão e ação devem ser imediatas.")
+        rs = riscos.sort_values("score", ascending=True)
+        cores_bar = [CORAL if s >= 6 else (AMBAR if s >= 4 else AZUL) for s in rs.score]
+        fig = go.Figure(go.Bar(
+            x=rs.score, y=rs.id + " " + rs.risco.str.split("(").str[0].str.strip(),
+            orientation="h",
+            marker=dict(color=cores_bar, cornerradius=3),
+            text=rs.score, textposition="outside", cliponaxis=False,
+            customdata=rs[["decisor", "acao_operacional"]],
+            hovertemplate="<b>%{y}</b><br>Score: %{x}<br>Decisor: %{customdata[0]}<br>Ação: %{customdata[1]}<extra></extra>"
+        ))
+        fig.update_xaxes(range=[0, 14], title="Score")
+        grafico(fig, 400, legenda=False)
+
+    html('<hr class="sep">')
+
+    # --- Semáforo por risco: cards
+    html('<div class="gt" style="margin-bottom:.3rem">🚦 Dashboard de Semáforos por Risco</div>')
+    html('<div class="gd">Cada risco tem limiares quantitativos. Verde: dentro da meta. Amarelo: atenção. Vermelho: agir agora.</div>')
+
+    # Build risk cards HTML
+    cards_html = '<div class="risk-grid">'
+    for _, r in riscos.iterrows():
+        score = r.prob_num * r.imp_num
+        if score >= 6:
+            sem_class = "r"
+            sem_label = "VERMELHO — Agir agora"
+        elif score >= 4:
+            sem_class = "y"
+            sem_label = "AMARELO — Atenção"
+        else:
+            sem_class = "g"
+            sem_label = "VERDE — Sob controle"
+
+        cards_html += f'''<div class="risk-card">
+            <div class="bar {sem_class}"></div>
+            <div style="padding-left:10px">
+                <div class="rid">{r.id} · {r.categoria.upper()}</div>
+                <div class="rn"><span class="dot {sem_class}"></span>{r.risco}</div>
+                <div class="meta">
+                    <div class="lbl">Probabilidade</div><div class="val">{r.probabilidade}</div>
+                    <div class="lbl">Impacto</div><div class="val">{r.impacto}</div>
+                    <div class="lbl">KPI / Gatilho</div><div class="val">{r.kpi_gatilho}</div>
+                    <div class="lbl">🟡 Amarelo</div><div class="val">{r.limiar_amarelo}</div>
+                    <div class="lbl">🔴 Vermelho</div><div class="val">{r.limiar_vermelho}</div>
+                    <div class="lbl">Decisor</div><div class="val">{r.decisor}</div>
+                </div>
+                <div class="acao"><b>Ação:</b> {r.acao_operacional}</div>
+            </div>
+        </div>'''
+    cards_html += '</div>'
+    html(cards_html)
+
+    html('<hr class="sep">')
+
+    # --- Cadência S&OE
+    html('<div class="gt" style="margin-bottom:.3rem">📅 Cadência S&amp;OE</div>')
+    html('<div class="gd">Governança em três camadas: operacional diária, tática semanal e estratégica mensal.</div>')
+
+    soe_html = '<div class="soe-row">'
+    soe_icons = ["⏱️", "📋", "📊"]
+    for i, (_, s) in enumerate(soe.iterrows()):
+        soe_html += f'''<div class="soe-box">
+            <div class="freq">{soe_icons[i]} {s.frequencia}</div>
+            <div class="dur">{s.duracao}</div>
+            <div class="who"><b>Participantes:</b> {s.participantes}</div>
+            <div class="what"><b>Pauta:</b> {s.pauta}</div>
+            <div class="what" style="margin-top:.3rem"><b>Entregável:</b> {s.entregavel}</div>
+        </div>'''
+    soe_html += '</div>'
+    html(soe_html)
+
+    st.info("Os limiares de semáforo foram calibrados com base na simulação de 364 dias (Q11) e nos KPIs estratégicos. "
+            "O status real deve ser atualizado diariamente pelo CD com dados do WMS.", icon="ℹ️")
 
 # ================================================================== PLANO
 else:

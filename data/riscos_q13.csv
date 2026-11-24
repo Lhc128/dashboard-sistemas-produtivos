@@ -1,0 +1,9 @@
+id,risco,probabilidade,prob_num,impacto,imp_num,kpi_gatilho,limiar_amarelo,limiar_vermelho,unidade_limiar,decisor,acao_operacional,categoria
+R1,Ruptura crítica F1 (Perecíveis),Média,2,Alto,3,Fill rate F1,< 97%,< 95%,%,Gerente de CD,Pedido emergencial ao fornecedor + redistribuição entre lojas,Estoque
+R2,Pico promocional não planejado,Alta,3,Alto,3,Demanda semanal vs forecast,> 130% do forecast,> 160% do forecast,%,Coord. Comercial + Gerente de CD,Reforecast imediato + pré-build de 40% por 3 semanas + alerta ao CD,Demanda
+R3,Atraso de fornecedor F2 (Premium),Média,2,Médio,2,Lead time realizado,> baseline + 2 dias,> baseline + 4 dias,dias,Gerente de Compras,Acionar fornecedor alternativo + ajustar SS temporariamente em +30%,Suprimentos
+R4,WMS offline / falha de sistema,Baixa,1,Crítico,4,Downtime acumulado,> 1 hora,> 3 horas,horas,TI + Gerente de CD,Ativar planilha de contingência manual + priorizar pedidos A,Tecnologia
+R5,Limite ESG de viagens excedido,Média,2,Alto,3,Viagens emergenciais/mês,≥ 14 viagens,≥ 18 viagens,viagens/mês,Coord. ESG + Logística,Consolidar próximos pedidos + revisar janelas de entrega,ESG
+R6,Cancelamento e-commerce elevado,Média,2,Alto,3,Taxa de cancelamento,> 3% semanal,> 5% semanal,%,Gerente E-commerce + CD,Reserva de estoque dedicada para e-commerce + reforecast canal online,Omnicanal
+R7,Obsolescência / baixo giro F2,Alta,3,Médio,2,Giro de estoque F2,< 0.8×/mês,< 0.5×/mês,×/mês,Gerente de Compras + Comercial,Promoção de liquidação + reduzir lote de compra em 50%,Estoque
+R8,Inflação de insumos alimentícios,Média,2,Médio,2,CPI Food mensal,> 1.0%/mês,> 1.5%/mês,%/mês,Diretoria + Compras,Renegociar contratos + revisar mix de produtos + repassar ao preço seletivamente,Financeiro
